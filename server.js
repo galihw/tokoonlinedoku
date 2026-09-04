@@ -8,6 +8,7 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+console.log(__dirname)
 
 // Mengambil variabel dari environment (Railway)
 const CLIENT_ID = process.env.DOKU_CLIENT_ID;
