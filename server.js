@@ -1,9 +1,8 @@
-require('dotenv').config({ path: './process.env' }); // Menggunakan process.env
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
 const path = require('path');
-//require('dotenv').config();
 
 const app = express();
 app.use(express.json());
