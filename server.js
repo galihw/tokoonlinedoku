@@ -1,5 +1,5 @@
-require('dotenv').config();
-//require('dotenv').config({ path: './process.env' }); // Menggunakan process.env
+//require('dotenv').config();
+require('dotenv').config({ path: './process.env' }); // Menggunakan process.env
 const express = require('express');
 const axios = require('axios');
 const crypto = require('crypto');
