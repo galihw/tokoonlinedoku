@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const CLIENT_ID = process.env.DOKU_CLIENT_ID;
 const SECRET_KEY = process.env.DOKU_SECRET_KEY;
 const IS_PRODUCTION = process.env.DOKU_IS_PRODUCTION === 'true';
+console.log(CLIENT_ID,SECRET_KEY,IS_PRODUCTION)
 
 const DOKU_BASE_URL = IS_PRODUCTION 
   ? 'https://api.doku.com' 
@@ -77,5 +78,4 @@ app.post('/api/checkout', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-console.log(PORT)
 app.listen(PORT, () => console.log(`Server berjalan di port ${PORT}`));
