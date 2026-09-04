@@ -1,57 +1,1494 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Toko Online - Payment DOKU</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 30px; background: #f4f4f4; }
-    .container { display: flex; gap: 20px; }
-    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px; text-align: center; }
-    button { background: #e61c24; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
-    button:hover { background: #cc1017; }
-  </style>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iconicmo - Kaos Bola</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  </head>
+  <body class="bg-secondary">
+	<script src="js/variabel.js"></script>
+	<script src="js/datalengkap.js"></script>
+  
+    <div class="container p-0 mb-4 mt-4 rounded-3 shadow bg-white">
+      <!-- menu -->
+      <nav class="d-md-flex p-4">
+        <div><h1>iconicmo</h1></div>
+		<div class="ms-auto my-auto dropdown">
+			<ul class="list-inline m-0 d-flex align-items-center">
+				<!-- Dropdown Produk Kami -->
+				<li class="list-inline-item mx-md-3 dropdown">
+					<a class="text-decoration-none text-dark fw-bold dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Produk Kami
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#" onclick="PilMenu(0)">Moment Keren</a></li>
+						<li><a class="dropdown-item" href="#" onclick="PilMenu(1)">Wonderkid yang bersinar di EURO 2024</a></li>
+						<li><a class="dropdown-item" href="#" onclick="PilMenu(2)">Liga Inggris Pemain Muda</a></li>
+						<li><a class="dropdown-item" href="#" onclick="PilMenu(3)">Timnas Indonesia</a></li>
+						<li><a class="dropdown-item" href="#" onclick="PilMenu(4)">Klub Eropa</a></li>
+						<li><a class="dropdown-item" href="#" onclick="PilMenu(5)">Lain-Lain</a></li>
+						<!--<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="#collections">Semua Produk</a></li>-->
+					</ul>
+				</li>
 
-  <h2>Pilih Barang untuk Dibeli</h2>
-  <div class="container">
-    <div class="card">
-      <h3>Kopi Susu</h3>
-      <p>Rp 20.000</p>
-      <button onclick="pay(20000, 'Kopi Susu')">Beli</button>
-    </div>
-    <div class="card">
-      <h3>Roti Bakar</h3>
-      <p>Rp 15.000</p>
-      <button onclick="pay(15000, 'Roti Bakar')">Beli</button>
-    </div>
-    <div class="card">
-      <h3>Nasi Goreng</h3>
-      <p>Rp 25.000</p>
-      <button onclick="pay(25000, 'Nasi Goreng')">Beli</button>
-    </div>
-  </div>
+				<li class="list-inline-item mx-md-3"><a href="#" onclick="PilMenu(6)" class="text-decoration-none text-dark fw-bold">Tentang Kami</a></li>
+				<li class="list-inline-item mx-md-3"><a href="#" onclick="PilMenu(7)" class="text-decoration-none text-dark fw-bold">Cara Order</a></li>
+			</ul>
+		</div>
+		
+      </nav>
+      <!-- banner -->
+      <div class="px-4 mb-4">
+        <img src="images/banner.png" class="w-100 rounded-3" />
+      </div>
 
-  <script>
-    async function pay(price, name) {
-      try {
-        const response = await fetch('/api/checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ item: { name, price } })
-        });
-        
-        const data = await response.json();
-        if (data.payment_url) {
-          // Redirect pengguna ke halaman pembayaran DOKU
-          window.location.href = data.payment_url;
-        } else {
-          alert('Gagal memproses pembayaran');
-        }
-      } catch (err) {
-        alert('Terjadi kesalahan koneksi');
-      }
-    }
-  </script>
-</body>
+      <!-- catalogue -->
+	  <div id="katalog">
+		  <h3 class="text-center" id="collections">Koleksi Kami</h3>
+		  <div class="text-center w-50 mx-auto fw-light" id="Judul Besar">Inilah koleksi desain kaos bola kami. Semua ini buatan asli Indonesia. 100% Indonesia.</div>
+
+		  <div class="row row-cols-md-3 row-cols-2 gx-5 p-5">
+			<div class="col mb-5" style="display:none" id="nama1">
+			  <div class="card shadow">
+				<img id="img1" src="images/6/kaos1.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul1">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi1"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga1">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama2">
+			  <div class="card shadow">
+				<img id="img2" src="images/6/kaos2.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul2">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi2"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga2">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama3">
+			  <div class="card shadow">
+				<img id="img3" src="images/6/kaos3.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul3">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi3"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga3">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama4">
+			  <div class="card shadow">
+				<img id="img4" src="images/6/kaos4.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul4">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi4"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga4">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama5">
+			  <div class="card shadow">
+				<img id="img5" src="images/6/kaos5.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul5">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi5"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga5">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama6">
+			  <div class="card shadow">
+				<img id="img6" src="images/6/kaos6.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul6">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi6"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga6">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama7">
+			  <div class="card shadow">
+				<img id="img7" src="images/6/kaos7.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul7">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi7"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga7">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama8">
+			  <div class="card shadow">
+				<img id="img8" src="images/6/kaos8.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul8">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi8"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga8">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama9">
+			  <div class="card shadow">
+				<img id="img9" src="images/6/kaos9.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul9">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi9"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga9">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama10">
+			  <div class="card shadow">
+				<img id="img10" src="images/6/kaos10.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul10">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi10"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga10">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama11">
+			  <div class="card shadow">
+				<img id="img11" src="images/6/kaos11.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul11">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi11"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga11">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama12">
+			  <div class="card shadow">
+				<img id="img12" src="images/6/kaos12.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul12">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi12"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga12">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama13">
+			  <div class="card shadow">
+				<img id="img13" src="images/6/kaos13.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul13">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi13"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga13">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama14">
+			  <div class="card shadow">
+				<img id="img14" src="images/6/kaos14.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul14">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi14"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga14">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama15">
+			  <div class="card shadow">
+				<img id="img15" src="images/6/kaos15.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul15">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi15"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga15">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama16">
+			  <div class="card shadow">
+				<img id="img16" src="images/6/kaos16.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul16">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi16"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga16">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama17">
+			  <div class="card shadow">
+				<img id="img17" src="images/6/kaos17.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul17">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi17"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga17">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama18">
+			  <div class="card shadow">
+				<img id="img18" src="images/6/kaos18.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul18">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi18"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga18">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama19">
+			  <div class="card shadow">
+				<img id="img19" src="images/6/kaos19.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul19">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi19"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga19">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama20">
+			  <div class="card shadow">
+				<img id="img20" src="images/6/kaos20.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul20">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi20"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga20">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama21">
+			  <div class="card shadow">
+				<img id="img21" src="images/6/kaos21.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul21">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi21"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga21">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama22">
+			  <div class="card shadow">
+				<img id="img22" src="images/6/kaos22.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul22">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi22"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga22">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama23">
+			  <div class="card shadow">
+				<img id="img23" src="images/6/kaos23.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul23">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi23"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga23">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama24">
+			  <div class="card shadow">
+				<img id="img24" src="images/6/kaos24.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul24">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi24"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga24">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama25">
+			  <div class="card shadow">
+				<img id="img25" src="images/6/kaos25.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul25">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi25"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga25">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama26">
+			  <div class="card shadow">
+				<img id="img26" src="images/6/kaos26.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul26">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi26"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga26">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama27">
+			  <div class="card shadow">
+				<img id="img27" src="images/6/kaos27.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul27">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi27"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga27">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama28">
+			  <div class="card shadow">
+				<img id="img28" src="images/6/kaos28.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul28">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi28"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga28">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama29">
+			  <div class="card shadow">
+				<img id="img29" src="images/6/kaos29.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul29">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi29"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga29">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama30">
+			  <div class="card shadow">
+				<img id="img30" src="images/6/kaos30.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul30">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi30"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga30">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama31">
+			  <div class="card shadow">
+				<img id="img31" src="images/6/kaos31.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul31">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi31"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga31">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama32">
+			  <div class="card shadow">
+				<img id="img32" src="images/6/kaos32.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul32">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi32"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga32">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama33">
+			  <div class="card shadow">
+				<img id="img33" src="images/6/kaos33.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul33">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi33"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga33">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama34">
+			  <div class="card shadow">
+				<img id="img34" src="images/6/kaos34.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul34">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi34"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga34">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama35">
+			  <div class="card shadow">
+				<img id="img35" src="images/6/kaos35.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul35">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi35"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga35">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama36">
+			  <div class="card shadow">
+				<img id="img36" src="images/6/kaos36.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul36">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi36"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga36">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama37">
+			  <div class="card shadow">
+				<img id="img37" src="images/6/kaos37.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul37">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi37"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga37">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama38">
+			  <div class="card shadow">
+				<img id="img38" src="images/6/kaos38.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul38">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi38"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga38">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama39">
+			  <div class="card shadow">
+				<img id="img39" src="images/6/kaos39.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul39">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi39"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga39">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama40">
+			  <div class="card shadow">
+				<img id="img40" src="images/6/kaos40.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul40">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi40"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga40">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama41">
+			  <div class="card shadow">
+				<img id="img41" src="images/6/kaos41.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul41">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi41"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga41">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama42">
+			  <div class="card shadow">
+				<img id="img42" src="images/6/kaos42.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul42">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi42"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga42">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama43">
+			  <div class="card shadow">
+				<img id="img43" src="images/6/kaos43.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul43">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi43"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga43">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama44">
+			  <div class="card shadow">
+				<img id="img44" src="images/6/kaos44.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul44">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi44"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga44">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama45">
+			  <div class="card shadow">
+				<img id="img45" src="images/6/kaos45.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul45">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi45"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga45">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama46">
+			  <div class="card shadow">
+				<img id="img46" src="images/6/kaos46.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul46">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi46"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga46">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama47">
+			  <div class="card shadow">
+				<img id="img47" src="images/6/kaos47.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul47">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi47"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga47">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama48">
+			  <div class="card shadow">
+				<img id="img48" src="images/6/kaos48.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul48">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi48"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga48">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama49">
+			  <div class="card shadow">
+				<img id="img49" src="images/6/kaos49.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul49">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi49"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga49">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama50">
+			  <div class="card shadow">
+				<img id="img50" src="images/6/kaos50.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul50">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi50"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga50">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama51">
+			  <div class="card shadow">
+				<img id="img51" src="images/6/kaos51.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul51">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi51"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga51">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama52">
+			  <div class="card shadow">
+				<img id="img52" src="images/6/kaos52.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul52">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi52"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga52">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama53">
+			  <div class="card shadow">
+				<img id="img53" src="images/6/kaos53.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul53">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi53"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga53">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama54">
+			  <div class="card shadow">
+				<img id="img54" src="images/6/kaos54.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul54">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi54"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga54">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama55">
+			  <div class="card shadow">
+				<img id="img55" src="images/6/kaos55.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul55">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi55"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga55">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama56">
+			  <div class="card shadow">
+				<img id="img56" src="images/6/kaos56.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul56">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi56"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga56">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama57">
+			  <div class="card shadow">
+				<img id="img57" src="images/6/kaos57.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul57">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi57"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga57">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama58">
+			  <div class="card shadow">
+				<img id="img58" src="images/6/kaos58.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul58">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi58"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga58">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama59">
+			  <div class="card shadow">
+				<img id="img59" src="images/6/kaos59.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul59">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi59"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga59">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama60">
+			  <div class="card shadow">
+				<img id="img60" src="images/6/kaos60.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul60">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi60"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga60">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama61">
+			  <div class="card shadow">
+				<img id="img61" src="images/6/kaos61.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul61">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi61"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga61">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama62">
+			  <div class="card shadow">
+				<img id="img62" src="images/6/kaos62.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul62">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi62"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga62">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama63">
+			  <div class="card shadow">
+				<img id="img63" src="images/6/kaos63.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul63">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi63"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga63">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama64">
+			  <div class="card shadow">
+				<img id="img64" src="images/6/kaos64.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul64">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi64"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga64">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama65">
+			  <div class="card shadow">
+				<img id="img65" src="images/6/kaos65.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul65">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi65"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga65">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama66">
+			  <div class="card shadow">
+				<img id="img66" src="images/6/kaos66.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul66">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi66"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga66">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama67">
+			  <div class="card shadow">
+				<img id="img67" src="images/6/kaos67.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul67">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi67"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga67">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama68">
+			  <div class="card shadow">
+				<img id="img68" src="images/6/kaos68.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul68">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi68"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga68">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama69">
+			  <div class="card shadow">
+				<img id="img69" src="images/6/kaos69.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul69">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi69"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga69">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama70">
+			  <div class="card shadow">
+				<img id="img70" src="images/6/kaos70.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul70">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi70"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga70">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama71">
+			  <div class="card shadow">
+				<img id="img71" src="images/6/kaos71.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul71">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi71"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga71">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama72">
+			  <div class="card shadow">
+				<img id="img72" src="images/6/kaos72.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul72">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi72"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga72">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama73">
+			  <div class="card shadow">
+				<img id="img73" src="images/6/kaos73.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul73">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi73"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga73">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama74">
+			  <div class="card shadow">
+				<img id="img74" src="images/6/kaos74.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul74">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi74"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga74">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama75">
+			  <div class="card shadow">
+				<img id="img75" src="images/6/kaos75.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul75">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi75"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga75">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama76">
+			  <div class="card shadow">
+				<img id="img76" src="images/6/kaos76.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul76">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi76"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga76">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama77">
+			  <div class="card shadow">
+				<img id="img77" src="images/6/kaos77.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul77">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi77"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga77">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama78">
+			  <div class="card shadow">
+				<img id="img78" src="images/6/kaos78.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul78">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi78"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga78">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama79">
+			  <div class="card shadow">
+				<img id="img79" src="images/6/kaos79.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul79">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi79"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga79">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama80">
+			  <div class="card shadow">
+				<img id="img80" src="images/6/kaos80.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul80">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi80"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga80">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama81">
+			  <div class="card shadow">
+				<img id="img81" src="images/6/kaos81.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul81">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi81"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga81">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama82">
+			  <div class="card shadow">
+				<img id="img82" src="images/6/kaos82.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul82">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi82"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga82">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama83">
+			  <div class="card shadow">
+				<img id="img83" src="images/6/kaos83.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul83">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi83"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga83">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama84">
+			  <div class="card shadow">
+				<img id="img84" src="images/6/kaos84.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul84">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi84"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga84">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama85">
+			  <div class="card shadow">
+				<img id="img85" src="images/6/kaos85.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul85">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi85"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga85">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama86">
+			  <div class="card shadow">
+				<img id="img86" src="images/6/kaos86.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul86">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi86"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga86">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama87">
+			  <div class="card shadow">
+				<img id="img87" src="images/6/kaos87.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul87">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi87"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga87">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama88">
+			  <div class="card shadow">
+				<img id="img88" src="images/6/kaos88.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul88">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi88"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga88">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama89">
+			  <div class="card shadow">
+				<img id="img89" src="images/6/kaos89.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul89">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi89"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga89">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama90">
+			  <div class="card shadow">
+				<img id="img90" src="images/6/kaos90.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul90">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi90"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga90">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama91">
+			  <div class="card shadow">
+				<img id="img91" src="images/6/kaos91.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul91">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi91"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga91">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama92">
+			  <div class="card shadow">
+				<img id="img92" src="images/6/kaos92.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul92">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi92"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga92">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama93">
+			  <div class="card shadow">
+				<img id="img93" src="images/6/kaos93.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul93">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi93"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga93">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama94">
+			  <div class="card shadow">
+				<img id="img94" src="images/6/kaos94.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul94">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi94"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga94">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama95">
+			  <div class="card shadow">
+				<img id="img95" src="images/6/kaos95.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul95">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi95"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga95">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama96">
+			  <div class="card shadow">
+				<img id="img96" src="images/6/kaos96.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul96">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi96"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga96">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama97">
+			  <div class="card shadow">
+				<img id="img97" src="images/6/kaos97.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul97">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi97"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga97">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama98">
+			  <div class="card shadow">
+				<img id="img98" src="images/6/kaos98.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul98">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi98"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga98">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama99">
+			  <div class="card shadow">
+				<img id="img99" src="images/6/kaos99.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul99">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi99"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga99">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama100">
+			  <div class="card shadow">
+				<img id="img100" src="images/6/kaos100.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul100">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi100"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga100">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama101">
+			  <div class="card shadow">
+				<img id="img101" src="images/6/kaos101.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul101">1 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi101"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga101">Rp. 51.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama102">
+			  <div class="card shadow">
+				<img id="img102" src="images/6/kaos102.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul102">2 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi102"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga102">Rp. 52.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama103">
+			  <div class="card shadow">
+				<img id="img103" src="images/6/kaos103.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul103">3 Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi103"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga103">Rp. 53.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama104">
+			  <div class="card shadow">
+				<img id="img104" src="images/6/kaos104.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul104">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi104"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga104">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama105">
+			  <div class="card shadow">
+				<img id="img105" src="images/6/kaos105.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul105">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi105"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga105">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<div class="col mb-5" style="display:none" id="nama106">
+			  <div class="card shadow">
+				<img id="img106" src="images/6/kaos106.png" loading="lazy" class="card-img-top" />
+				<div class="card-body">
+				  <p class="card-text" id="judul106">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+				</div>
+				<div class="d-none deskripsi" id="deskripsi106"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat unde delectus nam quod dolores soluta quos eveniet nobis mollitia necessitatibus maxime ratione saepe, nemo eligendi illo distinctio, optio itaque, eaque impedit illum! Obcaecati eius vero suscipit illum consequatur dolorum numquam accusamus autem? Debitis, voluptate quae?</p></div>
+				<div class="card-footer d-md-flex">
+				  <a class="btn btn-sm btn-primary d-block btnDetail">detail</a>
+				  <span class="ms-auto text-danger fw-bold d-block text-center harga" id="harga106">Rp. 50.000,00</span>
+				</div>
+			  </div>
+			</div>
+			<!-- Kontainer Tombol Previous dan Next 
+			<div class="container mt-4 text-center">
+				<div class="btn-group" role="group" aria-label="Navigasi Tombol">
+					<button type="button" class="btn btn-outline-primary" id="prev">&laquo;</button>
+					<button type="button" class="btn btn-outline-primary" id="next">&raquo;</button>
+				</div>
+			</div>-->
+		  </div>
+	  </div>
+      <!-- tentang kami-->
+      <div id="tentang" class="px-4 py-4 bg-secondary text-center">
+        <div class="mx-auto w-75">
+          <h3 class="text-white">Tentang Kami</h3>
+          <p class="text-center text-white"><img src="images/about-us.png" align="left" style="width: 100px; height: auto" class="me-3 mb-3" />Selamat datang di toko kami! Kami adalah penyedia kaos sablon kustom bertema sepak bola dunia dengan desain yang menarik.</p>
+        </div>
+      </div>
+
+      <!-- cara order -->
+      <div id="order" class="px-4 py-4 bg-light text-center">
+        <div class="mx-auto w-75">
+          <h3>Cara Order</h3>
+          <p class="text-center"><img src="images/order.png" align="right" style="width: 100px; height: auto" class="ms-3 mb-3" />Pilih produk, klik beli, chat whatsapp, bayar, konfirmasi, proses, kirim, sampai.</p>
+        </div>
+      </div>
+	  <script src="js/klikmenu.js"></script>
+
+
+      <!-- copyright -->
+      <div class="text-center p-4 border-top">&copy; 2026 iconicmo - Kaos Bola</div>
+    </div>
+    <!-- modal -->
+
+    <button type="button" class="btn btn-primary d-none btnModal" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch demo modal</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 modalTitle" id="exampleModalLabel"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body row">
+			
+            <div class="modalImage col-md-6 col-12"></div>
+			
+            <div class="col-md-6 col-12">
+              <div class="modalDeskripsi"></div>
+              <div class="d-md-flex">
+                <a href="" target="blank" class="btn btn-sm btn-danger d-block btnBeli">Beli Produk Ini</a>
+                <span class="ms-auto text-danger fw-bold d-block text-center modalHarga"></span>
+              </div>
+            </div>
+			
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
