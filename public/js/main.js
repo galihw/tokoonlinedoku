@@ -1,6 +1,5 @@
 document.querySelectorAll('.btnDetail').forEach(item => {
     item.addEventListener('click', (e) => {
-		
 		//sembunyikan katalog
 		document.getElementById("katalog").style.display = "none";
 		document.getElementById("productDetail").style.display = "";
@@ -15,7 +14,6 @@ document.querySelectorAll('.btnDetail').forEach(item => {
         let gambar = parent.querySelector('.card-img-top').src;
         let color = parent.querySelector('.card-img-top').style.backgroundColor;
 		
-		
 		// mengambil nomor di string gambar
 		let hasil1 = gambar.charAt(gambar.length-7);
 		let hasil2 = gambar[gambar.length-6];
@@ -23,8 +21,14 @@ document.querySelectorAll('.btnDetail').forEach(item => {
 		let no = 1*(hasil1+''+hasil2+''+hasil3);
 		if(hasil1=='s') no = 1*(hasil2+''+hasil3);
 		else if(hasil2=='s') no = 1*(hasil3);
+		//console.log(hasil1,hasil2,no);
+		//console.log(parent.id)
 		gambar = 'images/'+(noklik+1)+'/kaos'+no+'.png';
 		let gambar2 = 'images/'+(noklik+1)+'/orang'+no+'.jpg';
+		//console.log(hasil1,hasil2,hasil3);
+		
+		
+		
 		
         let harga = parent.querySelector('.harga').innerHTML;
         let judul = parent.querySelector('.card-text').innerHTML;
@@ -34,7 +38,6 @@ document.querySelectorAll('.btnDetail').forEach(item => {
         //let tombolModal = document.querySelector('.btnModal');
         //tombolModal.click();
 
-		
         document.querySelector('.modalTitle').innerHTML = judul;
         let image = document.createElement('img');
 		image.style.backgroundColor = color;
@@ -52,10 +55,16 @@ document.querySelectorAll('.btnDetail').forEach(item => {
         //const nohp = '6285714408830';
         //let pesan = `https://api.whatsapp.com/send?phone=${nohp}&text=Halo Bang, saya mau pesan produk ini ${judul}`;
         //document.querySelector('.btnBeli').href = pesan;
+		const nohp = '6285714408830';
+        let pesan = `https://api.whatsapp.com/send?phone=${nohp}&text=Halo Bang, saya mau pesan produk ini ${judul}`;
+        document.getElementById("buttonBeli").addEventListener('click', (e) => {
+			//window.location.href = pesan;
+			pay(parseInt(harga),judul);
+		})
 		
-        document.querySelector('.btnBeli').addEventListener('click', () => {
-		  pay(parseInt(harga),judul);
-		});
+        //document.querySelector('.btnBeli').addEventListener('click', () => {
+		//  pay(parseInt(harga),judul);
+		//});
 		
     });
 });
