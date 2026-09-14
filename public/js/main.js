@@ -269,7 +269,7 @@ function buyViaWhatsApp() {
 	if (!currentSelectedProduct) return;
 	
 	const nomorWA = "6285714408830";
-	const pesan = `Halo SablonKu, saya ingin memesan kaos sablon berikut:\n\n` +
+	const pesan = `Halo iconicmo, saya ingin memesan kaos sablon berikut:\n\n` +
 				  `📌 *Nama Produk:* ${currentSelectedProduct.judul}\n` +
 				  `🏷️ *Kategori:* ${currentSelectedProduct.kategori}\n` +
 				  `💰 *Harga:* ${currentSelectedProduct.harga}\n\n` +
